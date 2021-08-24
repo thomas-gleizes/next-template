@@ -1,6 +1,8 @@
+import React from "react";
+
 import Layout from "../components/layouts/Layout";
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <Layout className="flex flex-col-2 items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
