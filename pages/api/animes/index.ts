@@ -3,7 +3,7 @@ import Router from "../../../router";
 
 const router = new Router();
 
-router.get(function () {
+router.get(() => {
   console.log("ok");
 });
 
