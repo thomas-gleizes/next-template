@@ -4,7 +4,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex flex-col-2 items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold first-letter:text-[#FFAA33]">
+        <h1 className="text-6xl font-bold first-letter:text-[#db8000]">
           Welcome to{" "}
           <a className="text-blue-600" href="https://nextjs.org">
             Next.js!
