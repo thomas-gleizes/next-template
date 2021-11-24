@@ -4,15 +4,33 @@ import Router from "../../../router";
 const router = new Router();
 
 router.get = (req: NextApiRequest, res: NextApiResponse) => {
-  console.log({method: "GET"});
-}
+  res.send({
+    method: "GET",
+    animes: [
+      { id: 1, title: "Tokyo Ghoul" },
+      { id: 2, title: "Inuyasha" },
+    ],
+  });
+};
 
 router.post = (req: NextApiRequest, res: NextApiResponse) => {
-  console.log({method: "POST"});
-}
+  res.send({
+    method: "POST",
+    animes: [
+      { id: 1, title: "Tokyo Ghoul" },
+      { id: 2, title: "Inuyasha" },
+    ],
+  });
+};
 
 router.delete = (req: NextApiRequest, res: NextApiResponse) => {
-  console.log({ method: "DELETE" });
-}
+  res.send({
+    method: "DELETE",
+    animes: [
+      { id: 1, title: "Tokyo Ghoul" },
+      { id: 2, title: "Inuyasha" },
+    ],
+  });
+};
 
-export default router.handler;
+export default (req: NextApiRequest, res: NextApiResponse) => router.handler(req, res);

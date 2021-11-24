@@ -7,8 +7,6 @@ interface Data extends CustomResponse {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  console.log("Req", req.query);
-
   const animes = [
     { id: 3, title: "Tokyo Ghoul S2" },
     { id: 5, title: "Tokyo Ghoul RE" },

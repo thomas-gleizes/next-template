@@ -17,26 +17,16 @@ class Router {
   public handler(req: NextApiRequest, res: NextApiResponse): void {
     const { method } = req;
     try {
-      if (method === "GET" && typeof this._get !== undefined) {
+      if (method === "GET" && typeof this._get !== "undefined") {
         this._get(req, res);
-
-        res.status(200).json({ method: "GET", debug: this?.debug });
-      } else if (method === "POST" && typeof this._post !== undefined) {
+      } else if (method === "POST" && typeof this._post !== "undefined") {
         this._post(req, res);
-
-        res.status(200).json({ method: "POST", debug: this?.debug });
-      } else if (method === "PUT" && typeof this._put !== undefined) {
+      } else if (method === "PUT" && typeof this._put !== "undefined") {
         this._put(req, res);
-
-        res.status(200).json({ method: "PUT", debug: this?.debug });
-      } else if (method === "PATCH" && typeof this._patch !== undefined) {
+      } else if (method === "PATCH" && typeof this._patch !== "undefined") {
         this._patch(req, res);
-
-        res.status(200).json({ method: "PATCH", debug: this?.debug });
-      } else if (method === "DELETE" && typeof this._delete !== undefined) {
+      } else if (method === "DELETE" && typeof this._delete !== "undefined") {
         this._delete(req, res);
-
-        res.status(200).json({ method: "DELETE", debug: this?.debug });
       } else {
         res.status(404).json({ error: "No matching routes" });
       }
