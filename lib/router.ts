@@ -14,8 +14,10 @@ class Router {
     this.debug = "initialise";
   }
 
-  public handler(req: NextApiRequest, res: NextApiResponse): void {
+  public handler: route = (req, res) => {
     const { method } = req;
+    console.log("handler");
+
     try {
       if (method === "GET" && typeof this._get !== "undefined") {
         this._get(req, res);
@@ -33,7 +35,7 @@ class Router {
     } catch (e) {
       res.status(500).json({ error: e.message });
     }
-  }
+  };
 
   set get(route: route) {
     this._get = route;
@@ -46,6 +48,7 @@ class Router {
   set put(route: route) {
     this._put = route;
   }
+
   set patch(route: route) {
     this._patch = route;
   }
@@ -55,4 +58,4 @@ class Router {
   }
 }
 
-export default Router;
+export default new Router();

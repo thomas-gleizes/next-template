@@ -1,18 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { CustomResponse } from "../../../../types/server";
+import router from "../../../../lib/router";
 
-interface Data extends CustomResponse {
-  success: boolean;
-  anime: object;
-}
+router.get = (req: NextApiRequest, res: NextApiResponse) => {
+  res.send({
+    method: "GET",
+    animes: { id: 1, title: "Tokyo Ghoul" },
+  });
+};
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  console.log("Req", req.query);
-
-  const anime = {
-    id: 1,
-    title: "Tokyo Ghoul",
-  };
-
-  res.status(200).send({ success: true, anime });
-}
+export default (req: NextApiRequest, res: NextApiResponse) => router.handler(req, res);
