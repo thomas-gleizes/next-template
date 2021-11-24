@@ -16,8 +16,6 @@ class Router {
 
   public handler: route = (req, res) => {
     const { method } = req;
-    console.log("handler");
-
     try {
       if (method === "GET" && typeof this._get !== "undefined") {
         this._get(req, res);
