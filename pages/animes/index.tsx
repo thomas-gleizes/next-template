@@ -20,7 +20,7 @@ const ExploreAnimes: NextPage<Props> = ({ animes }) => {
       <ol className="list-disc list-inside">
         {animes.map((anime: Anime, index: number) => (
           <li key={index}>
-            {anime.id} - {anime.canonical_title} - {anime.slug}
+            {anime.id} - {anime.canonicalTitle} - {anime.slug}
           </li>
         ))}
       </ol>

@@ -22,14 +22,14 @@ const Index: NextPage<Props> = ({ anime }) => {
     <div>
       <Head>
         <title>
-          {anime.canonical_title} | {process.env.NEXT_PUBLIC_SITE_NAME}
+          {anime.canonicalTitle} | {process.env.NEXT_PUBLIC_SITE_NAME}
         </title>
       </Head>
       <div className="relative mb-20">
         <div
           className="absolute top-0 bottom-0 -z-10 w-full h-full bg-gradient-to-b from-red-800 bg-cover bg-center"
           style={{
-            backgroundImage: `url('${JSON.parse(anime.cover).small}')`,
+            backgroundImage: `url('${anime.cover.small}')`,
             height: "330px",
           }}
         />
@@ -41,7 +41,7 @@ const Index: NextPage<Props> = ({ anime }) => {
             <div className="h-20 w-full border" />
             <div className="mx-1 py-3 divide-opacity-10 divide-y-2">
               <div className="flex py-1">
-                <h2 className="text-3xl">{anime.canonical_title}</h2>
+                <h2 className="text-3xl">{anime.canonicalTitle}</h2>
                 <span className="text-md mt-2 ml-2 text-opacity-70">
                   ({anime.season})
                 </span>
@@ -52,12 +52,12 @@ const Index: NextPage<Props> = ({ anime }) => {
                     <FaStar size={18} className="text-yellow-400" />
                   </i>
                   <span>
-                    Rank {anime.rating_rank} ({anime.rating_average}%)
+                    Rank {anime.rating.rank} ({anime.rating.average}%)
                   </span>
                 </div>
                 <div className="flex text-sm">
                   <span>
-                    Rank {anime.popularity_rank} ({anime.popularity_count})
+                    Rank {anime.popularity.rank} ({anime.popularity.count})
                   </span>
                   <i className="mx-1">
                     <FaHeart size={18} className="text-red-700" />
@@ -72,7 +72,7 @@ const Index: NextPage<Props> = ({ anime }) => {
           <div className="mx-4 rounded-lg">
             <img
               className="rounded-sm mb-3"
-              src={JSON.parse(anime.poster).small}
+              src={anime.poster.small}
               alt="poster"
               onClick={() => window?.open(`https://kitsu.io/anime/${anime.slug}`)}
             />

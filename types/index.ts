@@ -1,4 +1,12 @@
-import Anime from "./animes";
-import { CustomErrorData, CustomResponseData, Router } from "./server";
+import Anime, { Images, Titles } from "./animes";
+import { CustomErrorData, CustomResponseData, Ressources, Router } from "./server";
 
-export type { Anime, CustomErrorData, CustomResponseData, Router };
+export type {
+  Anime,
+  Images,
+  Titles,
+  CustomErrorData,
+  CustomResponseData,
+  Router,
+  Ressources,
+};

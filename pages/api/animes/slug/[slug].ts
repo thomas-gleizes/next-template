@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
+import { Anime, CustomErrorData, CustomResponseData } from "../../../../types";
+import animesRessources from "../../../../resources/AnimesRessources";
 import router from "../../../../lib/router";
-import { CustomErrorData, CustomResponseData } from "../../../../types";
 
 interface Data extends CustomResponseData {
-  anime: any;
+  anime: Anime;
 }
 
 const prisma = new PrismaClient();
@@ -17,9 +18,11 @@ router.get = async (
   const { slug } = req.query;
 
   try {
-    const anime = await prisma.anime.findUnique({
-      where: { slug: `${slug}` },
-    });
+    const anime: Anime = animesRessources.one(
+      await prisma.anime.findUnique({
+        where: { slug: `${slug}` },
+      })
+    );
 
     res.send({ success: true, anime, params: req.query });
   } catch (e) {
