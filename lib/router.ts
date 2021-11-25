@@ -3,15 +3,40 @@ import { NextApiRequest, NextApiResponse } from "next";
 declare type route = (req: NextApiRequest, res: NextApiResponse) => void | undefined;
 
 class Router {
-  private _get: route;
-  private _post: route;
-  private _put: route;
-  private _patch: route;
-  private _delete: route;
   private debug: string;
 
   public constructor() {
     this.debug = "initialise";
+  }
+
+  private _get: route;
+
+  set get(route: route) {
+    this._get = route;
+  }
+
+  private _post: route;
+
+  set post(route: route) {
+    this._post = route;
+  }
+
+  private _put: route;
+
+  set put(route: route) {
+    this._put = route;
+  }
+
+  private _patch: route;
+
+  set patch(route: route) {
+    this._patch = route;
+  }
+
+  private _delete: route;
+
+  set delete(route: route) {
+    this._delete = route;
   }
 
   public handler: route = (req, res) => {
@@ -34,26 +59,6 @@ class Router {
       res.status(500).json({ error: e.message });
     }
   };
-
-  set get(route: route) {
-    this._get = route;
-  }
-
-  set post(route: route) {
-    this._post = route;
-  }
-
-  set put(route: route) {
-    this._put = route;
-  }
-
-  set patch(route: route) {
-    this._patch = route;
-  }
-
-  set delete(route: route) {
-    this._delete = route;
-  }
 }
 
 export default new Router();

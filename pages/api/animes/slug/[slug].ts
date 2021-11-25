@@ -5,7 +5,7 @@ import router from "../../../../lib/router";
 import { CustomErrorData, CustomResponseData } from "../../../../types";
 
 interface Data extends CustomResponseData {
-  animes: any;
+  anime: any;
 }
 
 const prisma = new PrismaClient();
@@ -14,14 +14,14 @@ router.get = async (
   req: NextApiRequest,
   res: NextApiResponse<Data | CustomErrorData>
 ) => {
-  const { id } = req.query;
+  const { slug } = req.query;
 
   try {
-    const animes = await prisma.anime.findUnique({
-      where: { id: +id },
+    const anime = await prisma.anime.findUnique({
+      where: { slug: `${slug}` },
     });
 
-    res.send({ success: true, animes, params: req.query });
+    res.send({ success: true, anime, params: req.query });
   } catch (e) {
     res.status(400).send({ error: e.message });
   }

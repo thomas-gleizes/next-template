@@ -5,9 +5,7 @@ const useContextFactory = <T>(context: React.Context<T>) => {
     const ctx = useContext<T>(context);
 
     if (ctx === undefined)
-      throw new Error(
-        `use{name}Context must be used withing a {name}ContextProvider.`
-      );
+      throw new Error(`use{name}Context must be used withing a {name}ContextProvider.`);
 
     return ctx;
   };

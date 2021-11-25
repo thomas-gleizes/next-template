@@ -7,8 +7,11 @@ export default interface Anime {
   synopsis: string;
   description: string;
   season: "Winter" | "Springs" | "Summer" | "Fall" | string;
-  rating: string;
-  popularity: number;
+  season_year: string;
+  rating_average: number;
+  rating_rank: number;
+  popularity_count: number;
+  popularity_rank: number;
   date_begin: Date;
   date_end: Date;
   poster: string;

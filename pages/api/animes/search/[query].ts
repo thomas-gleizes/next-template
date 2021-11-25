@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
 import router from "../../../../lib/router";
-import { Anime, CustomErrorData, CustomResponseData } from "../../../../types";
+import { CustomErrorData, CustomResponseData } from "../../../../types";
 
 interface Data extends CustomResponseData {
-  animes: Array<Anime>;
+  animes: Array<any>;
 }
 
 const prisma = new PrismaClient();

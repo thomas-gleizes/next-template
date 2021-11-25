@@ -2,24 +2,24 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 const buildList = (length, indicator, multi = 10) => {
   const json = Array(length)
-      .fill(0)
-      .reduce((prev, current, index) => {
-        let str = prev;
-        index++;
+    .fill(0)
+    .reduce((prev, current, index) => {
+      let str = prev;
+      index++;
 
-        if (index === 1) str = "{";
-        str += `\"${index * multi}\": \"${index * multi}${indicator}\"`;
+      if (index === 1) str = "{";
+      str += `\"${index * multi}\": \"${index * multi}${indicator}\"`;
 
-        if (index === length) return str + "}";
-        else return str + ",";
-      }, "");
+      if (index === length) return str + "}";
+      else return str + ",";
+    }, "");
 
   return JSON.parse(json);
 };
 
 module.exports = {
   mode: "jit",
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false,
   theme: {
     colors: {
@@ -44,4 +44,3 @@ module.exports = {
   },
   plugins: [],
 };
-

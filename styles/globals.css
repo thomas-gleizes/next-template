@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 input, button, textarea, select {
-  outline: none;
+    outline: none;
 }
