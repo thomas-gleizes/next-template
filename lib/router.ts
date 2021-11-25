@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-declare type route = (req: NextApiRequest, res: NextApiResponse) => void | undefined;
+declare type route = (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => Promise<void> | void | undefined;
 
 class Router {
   private _get: route;
@@ -33,26 +36,30 @@ class Router {
     this._delete = route;
   }
 
-  public handler: route = (req, res) => {
+  public async handler(req, res): Promise<void> {
     const { method } = req;
     try {
       if (method === "GET" && typeof this._get !== "undefined") {
-        this._get(req, res);
+        await this._get(req, res);
       } else if (method === "POST" && typeof this._post !== "undefined") {
-        this._post(req, res);
+        await this._post(req, res);
       } else if (method === "PUT" && typeof this._put !== "undefined") {
-        this._put(req, res);
+        await this._put(req, res);
       } else if (method === "PATCH" && typeof this._patch !== "undefined") {
-        this._patch(req, res);
+        await this._patch(req, res);
       } else if (method === "DELETE" && typeof this._delete !== "undefined") {
-        this._delete(req, res);
+        await this._delete(req, res);
       } else {
         res.status(404).json({ error: "No matching routes" });
       }
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      if (process.env.NODE_ENV === "development") {
+        res.status(500).json({ error: e.message });
+      } else {
+        res.status(500).json({ error: "Internal error" });
+      }
     }
-  };
+  }
 }
 
 export default new Router();

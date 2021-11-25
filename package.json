@@ -20,6 +20,8 @@
     "react-icons": "^4.3.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.6",
     "@types/node": "16.11.9",
     "@types/react": "17.0.36",
     "autoprefixer": "^10.4.0",

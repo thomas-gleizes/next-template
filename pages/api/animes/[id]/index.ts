@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
 import { Anime, CustomErrorData, CustomResponseData } from "../../../../types";
-import animesResources from "../../../../resources/AnimesRessources";
+import animesResources from "../../../../resources/AnimesResources";
 import router from "../../../../lib/router";
 import { func } from "prop-types";
 
@@ -18,17 +18,13 @@ router.get = async (
 ) => {
   const { id } = req.query;
 
-  try {
-    const anime: Anime = animesResources.one(
-      await prisma.anime.findUnique({
-        where: { id: +id },
-      })
-    );
+  const anime: Anime = animesResources.one(
+    await prisma.anime.findUnique({
+      where: { id: +id },
+    })
+  );
 
-    res.send({ success: true, anime, params: req.query });
-  } catch (e) {
-    res.status(400).send({ error: e.message });
-  }
+  res.send({ success: true, anime, params: req.query });
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

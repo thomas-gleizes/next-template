@@ -15,19 +15,15 @@ router.post = async (
   req: NextApiRequest,
   res: NextApiResponse<Data | CustomErrorData>
 ) => {
-  try {
-    const { body: user } = req;
+  const { body: user } = req;
 
-    user.password = await security.hash(`${user.password}-${user.email}`);
+  user.password = await security.hash(`${user.password}-${user.email}`);
 
-    const newUser: User = await prisma.user.create({
-      data: user,
-    });
+  const newUser: User = await prisma.user.create({
+    data: user,
+  });
 
-    res.send({ success: true, user: newUser });
-  } catch (e) {
-    res.status(500).send({ error: e.message });
-  }
+  res.send({ success: true, user: newUser });
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

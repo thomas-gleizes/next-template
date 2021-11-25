@@ -1,18 +1,15 @@
 import bcrypt from "bcrypt";
 
 class Security {
-  static seed: string = "";
-  static salt: number = 10;
+  private static seed: string = process.env.NODE_PASS_SEED;
+  private static salt: number = 10;
 
-  static hash(string): Promise<string> {
-    return bcrypt.hash(string, this.salt);
+  static hash(str: string): Promise<string> {
+    return bcrypt.hash(this.seed + str, this.salt);
   }
 
-  static compare(string, hash): Promise<boolean> {
-    return new Promise<boolean>(async (resolve, reject) => {
-      if (await bcrypt.compare(string, hash)) resolve(true);
-      else reject();
-    });
+  static compare(str: string, encrypted: string): Promise<boolean> {
+    return bcrypt.compare(this.seed + str, encrypted);
   }
 }
 

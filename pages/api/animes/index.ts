@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
 import { Anime, CustomErrorData, CustomResponseData } from "../../../types";
-import animesResources from "../../../resources/AnimesRessources";
+import animesResources from "../../../resources/AnimesResources";
 import router from "../../../lib/router";
 
 interface Data extends CustomResponseData {
@@ -17,18 +17,14 @@ router.get = async (
 ) => {
   const { limit, skip } = req.query;
 
-  try {
-    const animes: Array<Anime> = animesResources.many(
-      await prisma.anime.findMany({
-        take: +limit || 10,
-        skip: +skip || 0,
-      })
-    );
+  const animes: Array<Anime> = animesResources.many(
+    await prisma.anime.findMany({
+      take: +limit || 10,
+      skip: +skip || 0,
+    })
+  );
 
-    res.send({ success: true, animes, params: req.query });
-  } catch (e) {
-    res.status(400).send({ error: e.message });
-  }
+  res.send({ success: true, animes, params: req.query });
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

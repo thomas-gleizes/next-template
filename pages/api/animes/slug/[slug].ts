@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
 import { Anime, CustomErrorData, CustomResponseData } from "../../../../types";
-import animesResources from "../../../../resources/AnimesRessources";
+import animesResources from "../../../../resources/AnimesResources";
 import router from "../../../../lib/router";
 
 interface Data extends CustomResponseData {
