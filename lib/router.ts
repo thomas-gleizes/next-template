@@ -3,12 +3,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 declare type route = (req: NextApiRequest, res: NextApiResponse) => void | undefined;
 
 class Router {
-  private debug: string;
-
-  public constructor() {
-    this.debug = "initialise";
-  }
-
   private _get: route;
 
   set get(route: route) {
