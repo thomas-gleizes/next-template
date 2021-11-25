@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export interface CustomResponseData {
-  success: boolean;
+  success?: boolean;
   params?: any;
 }
 
