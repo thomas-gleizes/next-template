@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-type route = (req: NextApiRequest, res: NextApiResponse) => void | undefined;
+declare type route = (req: NextApiRequest, res: NextApiResponse) => void | undefined;
 
 class Router {
   private _get: route;
