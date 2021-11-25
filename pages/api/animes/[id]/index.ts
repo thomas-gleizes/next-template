@@ -17,7 +17,7 @@ router.get = async (
   const { id } = req.query;
 
   try {
-    const animes = await prisma.animes.findUnique({
+    const animes = await prisma.anime.findUnique({
       where: { id: +id },
     });
 

@@ -10,14 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
+model User {
     id Int @id @default(autoincrement())
     name String
     email String
     password String
+    @@map("users")
 }
 
-model animes {
+model Anime {
    id Int @id @default(autoincrement())
    kitsu_id String? @unique
    slug String
@@ -40,6 +41,7 @@ model animes {
    episode_length Int? @db.UnsignedInt
    status Status @default(unreleased)
    created_at DateTime @default(now())
+   @@map("animes")
 }
 
 enum Season {

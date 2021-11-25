@@ -17,7 +17,7 @@ router.get = async (
   const { limit, skip } = req.query;
 
   try {
-    const animes: Array<any> = await prisma.animes.findMany({
+    const animes: Array<any> = await prisma.anime.findMany({
       take: +limit || 10,
       skip: +skip || 0,
     });

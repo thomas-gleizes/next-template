@@ -17,7 +17,7 @@ router.get = async (
   const { limit, skip, query } = req.query;
 
   try {
-    const animes: Array<any> = await prisma.animes.findMany({
+    const animes: Array<any> = await prisma.anime.findMany({
       where: {
         canonical_title: {
           contains: `${query}`,
