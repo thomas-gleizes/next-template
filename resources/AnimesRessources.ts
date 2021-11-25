@@ -1,7 +1,8 @@
-import { Anime, Ressources } from "../types";
+import { Anime as AnimeModel } from "@prisma/client";
+import { Anime, Resources } from "../types";
 
-class AnimesRessources implements Ressources<any, Anime> {
-  public one(resources: any): Anime {
+class AnimesResources implements Resources<AnimeModel, Anime> {
+  public one(resource: AnimeModel): Anime {
     const {
       canonical_title,
       titles,
@@ -15,7 +16,7 @@ class AnimesRessources implements Ressources<any, Anime> {
       episode_length,
       created_at,
       ...rest
-    } = resources;
+    } = resource;
 
     return {
       canonicalTitle: canonical_title,
@@ -38,9 +39,9 @@ class AnimesRessources implements Ressources<any, Anime> {
     };
   }
 
-  public many(resources: Array<any>): Array<Anime> {
+  public many(resources: Array<AnimeModel>): Array<Anime> {
     return resources.map(this.one);
   }
 }
 
-export default new AnimesRessources();
+export default new AnimesResources();

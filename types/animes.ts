@@ -27,7 +27,7 @@ export interface Episode {
   count: number;
 }
 
-export default interface Anime {
+export declare type Anime = {
   id: number;
   kitsu_id: string;
   slug: string;
@@ -46,5 +46,4 @@ export default interface Anime {
   episode: Episode;
   type: "TV" | "Movie" | "OAV" | "ONA" | "OVA" | "special" | "music" | string;
   status: "finished" | "current" | "unreleased" | "tba" | "upcoming";
-  createdAt: Date;
-}
+};

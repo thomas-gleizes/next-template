@@ -3,6 +3,7 @@ import { GetServerSideProps, NextPage } from "next";
 
 import { Anime, CustomResponseData } from "../../types";
 import appAxios from "../../lib/appAxios";
+import AnimeCard from "../../components/common/AnimeCard";
 
 interface Props extends CustomResponseData {
   animes: Array<Anime>;
@@ -16,14 +17,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 const ExploreAnimes: NextPage<Props> = ({ animes }) => {
   return (
-    <div className="p-10">
-      <ol className="list-disc list-inside">
-        {animes.map((anime: Anime, index: number) => (
-          <li key={index}>
-            {anime.id} - {anime.canonicalTitle} - {anime.slug}
-          </li>
-        ))}
-      </ol>
+    <div className="grid grid-cols-4 max-w-1100 mx-auto my-10">
+      {animes.map((anime: Anime, index: number) => (
+        <div key={index} className="my-3 mx-auto">
+          <AnimeCard {...anime} />
+        </div>
+      ))}
     </div>
   );
 };

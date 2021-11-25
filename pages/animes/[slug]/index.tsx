@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { FaHeart, FaPlus, FaStar } from "react-icons/fa";
 
 import { Anime, CustomResponseData } from "../../../types";
@@ -69,9 +70,11 @@ const Index: NextPage<Props> = ({ anime }) => {
               </div>
             </div>
           </div>
-          <div className="mx-4 rounded-lg">
-            <img
-              className="rounded-sm mb-3"
+          <div className="mx-4">
+            <Image
+              width={280}
+              height={390}
+              className="rounded-sm shadow-lg mb-3"
               src={anime.poster.small}
               alt="poster"
               onClick={() => window?.open(`https://kitsu.io/anime/${anime.slug}`)}
@@ -79,7 +82,7 @@ const Index: NextPage<Props> = ({ anime }) => {
             <div>
               <div className="mx-auto">
                 <div className="my-1">
-                  <button className="w-full text-white rounded bg-gradient-to-tl from-red-500 to-yellow-500 py-1 shadow hover:shadow-lg transition">
+                  <button className="w-full text-white rounded bg-gradient-to-tl from-red-500 to-yellow-500 py-1 shadow-lg hover:shadow-2xl hover:scale-105 transform transition">
                     <span className="flex justify-center font-bold">
                       Ajouter
                       <i className="ml-2 my-auto">

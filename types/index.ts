@@ -1,5 +1,6 @@
-import Anime, { Images, Titles } from "./animes";
-import { CustomErrorData, CustomResponseData, Ressources, Router } from "./server";
+import { Anime } from "./animes";
+import { Images, Titles } from "./animes";
+import { CustomErrorData, CustomResponseData, Resources, Router } from "./server";
 
 export type {
   Anime,
@@ -8,5 +9,5 @@ export type {
   CustomErrorData,
   CustomResponseData,
   Router,
-  Ressources,
+  Resources,
 };

@@ -18,7 +18,7 @@ export interface Router {
   handler: (req: NextApiRequest, res: NextApiResponse) => any;
 }
 
-export interface Ressources<E = any, S = any> {
-  one: (ressource: E) => S;
-  many: (ressources: Array<E>) => Array<S>;
+export interface Resources<E = any, S = any> {
+  one: (resource: E) => S;
+  many: (resources: Array<E>) => Array<S>;
 }
