@@ -49,7 +49,6 @@ enum Season {
     Springs
     Summer
     Fall
-    none
 }
 
 enum Type {
