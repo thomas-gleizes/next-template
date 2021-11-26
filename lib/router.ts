@@ -54,6 +54,7 @@ class Router {
       }
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
+        console.error("E", e);
         res.status(500).json({ error: e.message });
       } else {
         res.status(500).json({ error: "Internal error" });

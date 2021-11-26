@@ -16,19 +16,25 @@ router.post = async (
   req: NextApiRequest,
   res: NextApiResponse<Data | CustomErrorData>
 ) => {
-  const { body: userData } = req;
+  const {
+    body: { email, password },
+  } = req;
 
-  userData.password = await security.hash(userData.password);
-
-  const [newUser, password] = UsersResources.one(
-    await prisma.user.create({
-      data: userData,
+  const [user, hash]: [User, string] = UsersResources.one(
+    await prisma.user.findUnique({
+      where: { email },
     })
   );
 
-  newUser.token = security.sign(newUser);
+  throw new Error("eror");
 
-  res.send({ success: true, user: newUser });
+  if (!user || !(await security.compare(password, hash))) {
+    res.status(401).send({ error: "email/password wrong" });
+  }
+
+  user.token = security.sign(user);
+
+  res.send({ success: true, user });
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
