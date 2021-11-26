@@ -3,8 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 import { CustomErrorData, CustomResponseData, User } from "../../../types";
 import router from "../../../lib/router";
-import security from "../../../lib/security";
-import UsersResources from "../../../resources/UsersResources";
+import Security from "../../../lib/security";
+import usersResources from "../../../resources/UsersResources";
 
 interface Data extends CustomResponseData {
   user: User;
@@ -20,19 +20,18 @@ router.post = async (
     body: { email, password },
   } = req;
 
-  const [user, hash]: [User, string] = UsersResources.one(
+  const [user, hash]: [User, string] = usersResources.one(
     await prisma.user.findUnique({
       where: { email },
     })
   );
 
-  throw new Error("eror");
-
-  if (!user || !(await security.compare(password, hash))) {
+  if (!user || !(await Security.compare(password, hash))) {
     res.status(401).send({ error: "email/password wrong" });
+    return;
   }
 
-  user.token = security.sign(user);
+  user.token = Security.sign(user);
 
   res.send({ success: true, user });
 };

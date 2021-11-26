@@ -3,8 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 import { CustomErrorData, CustomResponseData, User } from "../../../types";
 import router from "../../../lib/router";
-import security from "../../../lib/security";
-import UsersResources from "../../../resources/UsersResources";
+import Security from "../../../lib/security";
+import usersResources from "../../../resources/UsersResources";
 
 interface Data extends CustomResponseData {
   user: User;
@@ -18,15 +18,15 @@ router.post = async (
 ) => {
   const { body: userData } = req;
 
-  userData.password = await security.hash(userData.password);
+  userData.password = await Security.hash(userData.password);
 
-  const [newUser, password] = UsersResources.one(
+  const [newUser, password]: [User, string] = usersResources.one(
     await prisma.user.create({
       data: userData,
     })
   );
 
-  newUser.token = security.sign(newUser);
+  newUser.token = Security.sign(newUser);
 
   res.send({ success: true, user: newUser });
 };
