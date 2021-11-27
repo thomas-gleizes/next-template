@@ -39,8 +39,8 @@ export declare type Anime = {
   season_year: string;
   rating: Rating;
   popularity: Popularity;
-  date_begin: Date;
-  date_end: Date;
+  date_begin: string;
+  date_end: string;
   poster: Images;
   cover: Images;
   episode: Episode;

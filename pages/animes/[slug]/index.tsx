@@ -19,6 +19,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 };
 
 const Index: NextPage<Props> = ({ anime }) => {
+  if (!anime) return null;
+
   return (
     <div>
       <Head>
@@ -71,14 +73,16 @@ const Index: NextPage<Props> = ({ anime }) => {
             </div>
           </div>
           <div className="mx-4">
-            <Image
-              width={280}
-              height={390}
-              className="rounded-sm shadow-lg mb-3"
-              src={anime.poster.small}
-              alt="poster"
-              onClick={() => window?.open(`https://kitsu.io/anime/${anime.slug}`)}
-            />
+            <div className="border border-black">
+              <Image
+                width={280}
+                height={390}
+                className="rounded-sm shadow-lg mb-3"
+                src={anime.poster.small}
+                alt="poster"
+                onClick={() => window?.open(`https://kitsu.io/anime/${anime.slug}`)}
+              />
+            </div>
             <div>
               <div className="mx-auto">
                 <div className="my-1">
