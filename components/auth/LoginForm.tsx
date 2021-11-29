@@ -1,50 +1,58 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, FormikHelpers } from "formik";
+import * as Yup from "yup";
 
-declare type loginValues = {
-  email: string;
-  password: string;
+import Field from "../common/field";
+
+const loginSchema = Yup.object({
+  email: Yup.string()
+    .email("Veuillez saisir un email valide")
+    .required("Veuillez saisir un email"),
+  password: Yup.string().required("Veuillez saisir un mot de passe"),
+});
+
+type loginType = Yup.TypeOf<typeof loginSchema>;
+
+const initialValues: loginType = {
+  email: "",
+  password: "",
 };
 
 const LoginForm: React.FunctionComponent = () => {
+  const handleSubmit = (values: loginType, formik: FormikHelpers<loginType>) => {};
+
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      onSubmit={(values: loginValues) => console.log("Values", values)}
-    >
-      <Form>
-        <div className="">
-          <div className="flex flex-col my-5">
-            <label className="px-2 text-xl font-semibold">
-              Email <em>*</em>
-            </label>
-            <Field
-              className="border-4 border-gray-400 hover:border-blue-600 rounded-lg bg-gray-50 px-4 py-2 text-xl transition"
-              type="email"
-              name="email"
-            />
+    <div className="bg-gray-50 border px-10 py-10 shadow-xl rounded">
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={loginSchema}
+      >
+        <Form>
+          <div>
+            <div className="mb-10 text-center">
+              <h2 className="text-2xl font-semibold">
+                Connectez-vous a {process.env.NEXT_PUBLIC_APP_NAME}
+              </h2>
+            </div>
+            <div className="flex flex-col my-5">
+              <Field label="Email" type="email" name="email" required />
+            </div>
+            <div className="flex flex-col my-5">
+              <Field label="Mot de passe" type="password" name="password" required />
+            </div>
           </div>
-          <div className="flex flex-col my-5">
-            <label className="px-2 text-xl font-semibold">
-              Password <em>*</em>
-            </label>
-            <Field
-              className="border-4 border-gray-400 hover:border-blue-600 rounded-lg bg-gray-50 px-4 py-2 text-xl transition"
-              type="password"
-              name="password"
-            />
+          <div className="text-center">
+            <button
+              type="submit"
+              className="bg-blue-700 text-white text-xl px-10 py-2 rounded shadow hover:shadow-xl cursor-pointer transition transform duration-100 hover:scale-105"
+            >
+              Connexion
+            </button>
           </div>
-        </div>
-        <div>
-          <button
-            type="submit"
-            className="bg-blue-700 text-white text-xl px-10 py-2 rounded shadow hover:shadow-xl cursor-pointer transition transform duration-100 hover:scale-105"
-          >
-            Connexion
-          </button>
-        </div>
-      </Form>
-    </Formik>
+        </Form>
+      </Formik>
+    </div>
   );
 };
 

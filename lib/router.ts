@@ -53,7 +53,7 @@ class Router {
         res.status(404).json({ error: "No matching routes" });
       }
     } catch (e) {
-      if (process.env.NODE_ENV === "development") {
+      if (process.env.NODE_ENV !== "production") {
         console.error("E", e);
         res.status(500).json({ error: e.message });
       } else {
