@@ -10,19 +10,36 @@ interface Data extends CustomResponseData {
   user: User;
 }
 
+interface Error extends CustomErrorData {
+  key?: string;
+}
+
 const prisma = new PrismaClient();
 
-router.post = async (
-  req: NextApiRequest,
-  res: NextApiResponse<Data | CustomErrorData>
-) => {
+router.post = async (req: NextApiRequest, res: NextApiResponse<Data | Error>) => {
   const { body: userData } = req;
 
-  userData.password = await Security.hash(userData.password);
+  const users: Array<any> = await prisma.user.findMany({
+    where: {
+      OR: [{ email: userData.email }, { login: userData.login }],
+    },
+  });
+
+  if (users.length) {
+    let key = "login";
+    if (users[0].email === userData.email) key = "email";
+
+    res.status(400).send({ error: "", key });
+    throw new Error();
+  }
 
   const [newUser, password]: [User, string] = usersResources.one(
     await prisma.user.create({
-      data: userData,
+      data: {
+        login: userData.login,
+        email: userData.email,
+        password: await Security.hash(userData.password),
+      },
     })
   );
 

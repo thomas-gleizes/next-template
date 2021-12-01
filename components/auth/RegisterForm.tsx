@@ -23,10 +23,10 @@ const validationSchema = Yup.object({
 type registerForm = Yup.TypeOf<typeof validationSchema>;
 
 const initialValues: registerForm = {
-  login: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  login: "Kalat",
+  email: "kalat@kanime.fr",
+  password: "azerty",
+  confirmPassword: "azerty",
 };
 
 const RegisterForm: React.FunctionComponent = () => {
