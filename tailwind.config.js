@@ -1,5 +1,3 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
-
 const buildList = (length, indicator, multi = 10) => {
   const json = Array(length)
     .fill(0)
