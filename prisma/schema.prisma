@@ -8,33 +8,53 @@ datasource db {
 }
 
 model Anime {
-  id               Int          @id @default(autoincrement())
-  kitsu_id         String?      @unique
-  slug             String       @unique
+  id               Int             @id @default(autoincrement())
+  kitsu_id         String?         @unique
+  slug             String          @unique
   canonical_title  String
-  titles           String?      @db.LongText
-  synopsis         String?      @db.Text
-  description      String?      @db.Text
+  titles           String?         @db.LongText
+  synopsis         String?         @db.Text
+  description      String?         @db.Text
   season           AnimeSeason?
-  season_year      String?      @db.VarChar(4)
-  date_begin       DateTime?    @db.Date
-  date_end         DateTime?    @db.Date
+  season_year      String?         @db.VarChar(4)
+  date_begin       DateTime?       @db.Date
+  date_end         DateTime?       @db.Date
   rating_average   Float?
-  rating_rank      Int?         @db.UnsignedInt
+  rating_rank      Int?            @db.UnsignedInt
   popularity_count Float?
-  popularity_rank  Int?         @db.UnsignedInt
+  popularity_rank  Int?            @db.UnsignedInt
   type             AnimeType?
-  poster           String?      @db.LongText
-  cover            String?      @db.LongText
-  episode_count    Int?         @db.UnsignedInt
-  episode_length   Int?         @db.UnsignedInt
-  status           AnimeStatus  @default(unreleased)
-  created_at       DateTime     @default(now()) @db.Timestamp(0)
-  updated_at       DateTime     @default(now()) @db.Timestamp(0)
+  poster           String?         @db.LongText
+  cover            String?         @db.LongText
+  episode_count    Int?            @db.UnsignedInt
+  episode_length   Int?            @db.UnsignedInt
+  status           AnimeStatus     @default(unreleased)
+  created_at       DateTime        @default(now()) @db.Timestamp(0)
   users            AnimeUser[]
+  categories       AnimeCategory[]
 
   @@index([canonical_title], map: "animes_canonical_title_index")
   @@map("animes")
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  libelle     String
+  created_at  DateTime  @default(now()) @db.Timestamp(0)
+  animes      AnimeCategory[]
+
+  @@map("categories")
+}
+
+model AnimeCategory {
+  anime_id     Int
+  category_id  Int
+  created_at   DateTime  @default(now()) @db.Timestamp(0)
+  anime        Anime     @relation(fields: [anime_id], references: [id])
+  category     Category  @relation(fields: [category_id], references: [id])
+
+  @@id([anime_id, category_id])
+  @@map("animes_categories")
 }
 
 model User {
