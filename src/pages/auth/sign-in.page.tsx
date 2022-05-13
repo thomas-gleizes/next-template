@@ -1,22 +1,32 @@
-import type { Page } from "next/app";
 import React from "react";
+import { useRouter } from "next/router";
 import { Form, Formik } from "formik";
 
+import type { Page } from "next/app";
 import AuthApi from "api/auth.api";
 import DefaultLayout from "components/layouts/DefaultLayout";
 import Input from "components/form/Input";
 import Button from "components/common/Button";
+import { ssrHandler } from "services/handler.service";
 
 const initialValues: SignInPayload = {
-  password: "",
+  username: "Kalat",
+  password: "azerty",
   rememberMe: "",
-  username: "",
 };
 
+const getServerSideProps = ssrHandler(async (context) => {
+  return { props: {} };
+});
+
 const SignInPage: Page = () => {
+  const router = useRouter();
+
   const handleSubmit = async (values: SignInPayload) => {
     try {
       const response = await AuthApi.signIn(values);
+
+      router.push(`/user/${values.username}`);
     } catch (e) {}
   };
 
@@ -31,11 +41,21 @@ const SignInPage: Page = () => {
             <Form className="flex flex-col space-y-2">
               <div>
                 <label>Username</label>
-                <Input name="username" value={values.username} onChange={handleChange} />
+                <Input
+                  type="text"
+                  name="username"
+                  value={values.username}
+                  onChange={handleChange}
+                />
               </div>
               <div>
                 <label>Mot de passe</label>
-                <Input name="password" value={values.password} onChange={handleChange} />
+                <Input
+                  type="password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                />
               </div>
               <div>
                 <Button type="submit">Connexion</Button>

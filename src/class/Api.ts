@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
 
 abstract class Api {
   private readonly _instance: AxiosInstance;
@@ -12,14 +12,14 @@ abstract class Api {
   protected get<R extends DefaultResponse = DefaultResponse, P = undefined>(
     path: string,
     params?: any
-  ): Promise<R> {
+  ): Promise<AxiosResponse<R>> {
     return this._instance.get<R, R, P>(`${this._path}${path}`, params);
   }
 
   protected post<R extends DefaultResponse = DefaultResponse, D = any>(
     path: string,
     data: D
-  ): Promise<R> {
+  ): Promise<AxiosResponse<R>> {
     return this._instance.post<R, R, D>(`${this._path}${path}`, data);
   }
 }

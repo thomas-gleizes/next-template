@@ -20,7 +20,10 @@ interface LayoutContext {
   dialogState: State<Dialog>;
 }
 
-declare type User = any;
+declare type User = {
+  id: string;
+  name: string;
+};
 
 interface UserContext {
   isLoginIn: boolean;
@@ -60,17 +63,7 @@ type InputType =
   | "time"
   | "color";
 
-declare type TailwindcssGradiant =
-  | 50
-  | 100
-  | 200
-  | 300
-  | 400
-  | 500
-  | 600
-  | 700
-  | 800
-  | 900;
+declare type TailwindcssGradiant = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
 declare type TailwindcssColors =
   | "slate"

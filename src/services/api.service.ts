@@ -6,7 +6,7 @@ const apiService = axios.create({
 });
 
 apiService.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   (error) => {
     throw error;
   }
