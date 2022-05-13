@@ -19,6 +19,24 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./src",
+    "paths": {
+      "api": ["api"],
+      "class/*": ["class/*"],
+      "components/*": ["components/*"],
+      "context/*": ["context/*"],
+      "hooks": ["hooks"],
+      "mappers": ["mappers"],
+      "middlewares/*": ["middlewares/*"],
+      "models": ["models"],
+      "pages/*": ["pages/*"],
+      "resources/*": ["resources/*"],
+      "services/*": ["services/*"],
+      "styles/*": ["styles/*"],
+      "utils/*": ["utils/*"],
+      "errors": ["errors"],
+      "public/*": ["../public"],
+      "types": ["../types"]
+    }
   },
   "include": [
     "next-env.d.ts",

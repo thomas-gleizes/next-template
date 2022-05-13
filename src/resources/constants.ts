@@ -4,6 +4,16 @@ export const dialogTypes = {
   confirm: "confirm",
 };
 
+export const rootPath = process.cwd();
+export const publicPath = `${rootPath}/public`;
+
+export const loggerReplaceKey = {
+  password: "********",
+  confirmPassword: "********",
+  avatar: "data:Image/*;base64:*****",
+  background: "data:Image/*;base64:*****",
+};
+
 export const tailwindcssGradiant = {
   50: "50",
   100: "100",
@@ -16,7 +26,6 @@ export const tailwindcssGradiant = {
   800: "800",
   900: "900",
 };
-
 export const tailwindcssColors = {
   slate: "slate",
   gray: "gray",

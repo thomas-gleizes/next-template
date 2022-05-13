@@ -1,8 +1,8 @@
-import handler from "services/handler.service";
+import { apiHandler } from "services/handler.service";
+
+const handler = apiHandler();
 
 handler.post(async (req, res) => {
-  console.log("Ok");
-
   res.send({ success: true });
 });
 

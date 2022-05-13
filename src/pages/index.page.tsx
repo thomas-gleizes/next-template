@@ -1,6 +1,21 @@
 import type { NextPage } from "next";
+import { ssrHandler } from "services/handler.service";
 
-const Home: NextPage = () => {
+interface Props {
+  timestamp: number;
+}
+
+export const getServerSideProps = ssrHandler<Props>(async (context) => {
+  console.log("ICI");
+
+  return {
+    props: {
+      timestamp: Date.now(),
+    },
+  };
+});
+
+const Home: NextPage<Props> = ({ timestamp }) => {
   return (
     <div className="flex flex-col-2 items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
@@ -10,12 +25,11 @@ const Home: NextPage = () => {
             Next.js!
           </a>
         </h1>
+        <div>timestamp : {timestamp}</div>
 
         <p className="mt-3 text-2xl">
           Get started by editing{" "}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.ts
-          </code>
+          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">pages/index.ts</code>
         </p>
 
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">

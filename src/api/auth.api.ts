@@ -1,4 +1,4 @@
-import Api from "helpers/Api";
+import Api from "class/Api";
 import apiService from "../services/api.service";
 
 class AuthApi extends Api {
