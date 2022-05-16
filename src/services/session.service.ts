@@ -1,40 +1,40 @@
-import type { IronSessionOptions } from "iron-session";
-import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
-import { ParsedUrlQuery } from "querystring";
-import {
-  GetServerSideProps,
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  NextApiHandler,
-  PreviewData,
-} from "next";
+import cookie from "cookie";
 
-const sessionOptions: IronSessionOptions = {
-  password: process.env.SECRET_TOKEN as string,
-  cookieName: "kanime_auth",
-  // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-  },
+import { ApiRequest, ApiResponse } from "next/app";
+
+const SessionService = {
+  create() {},
 };
 
-export const withSessionApi = (handler: NextApiHandler) =>
-  withIronSessionApiRoute(handler, sessionOptions);
-
-export function withSessionSsr<
-  P extends { [key: string]: any } = { [key: string]: any },
-  Q extends ParsedUrlQuery = ParsedUrlQuery,
-  D extends PreviewData = PreviewData
->(
-  handler: (context: GetServerSidePropsContext<Q, D>) => Promise<GetServerSidePropsResult<P>>
-): GetServerSideProps<P, Q, D> {
-  return withIronSessionSsr(handler, sessionOptions);
-}
-
-// This is where we specify the typings of req.session.*
-declare module "iron-session" {
-  interface IronSessionData {
-    user: User;
-    token: string;
-  }
-}
+// export default class SessionService {
+//   private readonly _req: ApiRequest;
+//   private readonly _res: ApiResponse;
+//
+//   private static secure: boolean = process.env.NODE_ENV === "production";
+//   private static domain: string = process.env.NEXT_PUBLIC_APP_DOMAIN;
+//
+//   constructor(req: ApiRequest, res: ApiResponse) {
+//     this._req = req;
+//     this._res = res;
+//   }
+//
+//   private setCookie(key: string, content: any): void {
+//     this._res.setHeader(
+//       "Set-Cookie",
+//       cookie.serialize(key, JSON.stringify(content), {
+//         secure: SessionService.secure,
+//         domain: SessionService.domain,
+//         httpOnly: true,
+//         maxAge: 60 * 60 * 24 * 7,
+//         path: "/",
+//       })
+//     );
+//   }
+//
+//   create(user: User, token: string): void {
+//     this.setCookie("user", user);
+//     this.setCookie("token", token);
+//   }
+//
+//   destroy(): void {}
+// }

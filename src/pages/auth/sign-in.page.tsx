@@ -15,7 +15,10 @@ const initialValues: SignInPayload = {
   rememberMe: "",
 };
 
-const getServerSideProps = ssrHandler(async (context) => {
+export const getServerSideProps = ssrHandler(async (context) => {
+
+  console.log(context.req.cookies);
+
   return { props: {} };
 });
 
@@ -26,7 +29,9 @@ const SignInPage: Page = () => {
     try {
       const response = await AuthApi.signIn(values);
 
-      router.push(`/user/${values.username}`);
+      // router.push(`/user/${values.username}`);
+
+      console.log(document.cookie);
     } catch (e) {}
   };
 
@@ -57,7 +62,7 @@ const SignInPage: Page = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div>
+              <div className="pt-4">
                 <Button type="submit">Connexion</Button>
               </div>
             </Form>

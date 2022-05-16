@@ -8,6 +8,11 @@ interface ContextProviderProps {
   children: React.ReactNode;
 }
 
+interface SessionService {
+  destroy: () => void;
+  create: () => void;
+}
+
 declare type dialogType = "alert" | "confirm" | "prompt";
 
 interface Dialog<T = any> {

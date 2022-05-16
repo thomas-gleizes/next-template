@@ -1,5 +1,13 @@
 declare module "next/app" {
-  import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
+  import {
+    GetServerSideProps,
+    GetStaticPaths,
+    GetStaticProps,
+    NextApiRequest,
+    NextApiResponse,
+    NextPage,
+  } from "next";
+  import SessionService from "services/session.service";
 
   declare type Page<P = {}> = NextPage<P> & {
     layout?: Component<{ children: Node } & P>;
@@ -13,4 +21,7 @@ declare module "next/app" {
     pageProps: any;
     Component: Page & { layout?: Component };
   }
+
+  declare type ApiRequest = NextApiRequest & { session: SessionService };
+  declare type ApiResponse = NextApiResponse;
 }

@@ -1,12 +1,11 @@
-import cookie from "cookie";
-
+import { ApiRequest, ApiResponse } from "next/app";
 import { apiHandler } from "services/handler.service";
 import { ApiError } from "errors";
 import domUuid from "utils/domUuid";
 
 const handler = apiHandler();
 
-handler.post(async (req, res) => {
+handler.post(async (req: ApiRequest, res: ApiResponse) => {
   if (!req.body.username) throw new ApiError("Username is required", 400);
 
   const user: User = {
@@ -14,14 +13,7 @@ handler.post(async (req, res) => {
     name: req.body.username,
   };
 
-  res.setHeader(
-    "Set-Cookie",
-    cookie.serialize("user", JSON.stringify(user), {
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7,
-      secure: true,
-    })
-  );
+  req.session.create(user, "token");
 
   res.send({ success: true, user });
 });

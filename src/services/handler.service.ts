@@ -11,10 +11,10 @@ import httpStatus from "http-status";
 import nc from "next-connect";
 
 import { apiLogger, ssrLogger } from "middlewares/logger.middleware";
-import queryParser from "middlewares/queryParser.middleware";
-import { withSessionSsr } from "services/session.service";
+import queryParserMiddleware from "middlewares/queryParser.middleware";
 import trace from "utils/trace";
 import { ApiError, SchemaError, SsrError } from "errors";
+import sessionMiddleware from "middlewares/session.middleware";
 
 export const apiHandler = () =>
   nc<NextApiRequest, NextApiResponse>({
@@ -46,7 +46,8 @@ export const apiHandler = () =>
     },
   })
     .use(apiLogger)
-    .use(queryParser);
+    .use(queryParserMiddleware)
+    .use(sessionMiddleware);
 
 export function ssrHandler<
   P extends { [key: string]: any } = { [key: string]: any },
@@ -56,7 +57,7 @@ export function ssrHandler<
   handler: (context: GetServerSidePropsContext<Q>) => Promise<GetServerSidePropsResult<P>>
 ): GetServerSideProps<P, Q, D> {
   // @ts-ignore
-  return withSessionSsr<P, Q, D>(async (context) => {
+  return async (context) => {
     try {
       ssrLogger(context);
 
@@ -90,5 +91,5 @@ export function ssrHandler<
         };
       }
     }
-  });
+  };
 }

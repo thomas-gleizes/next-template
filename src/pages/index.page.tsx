@@ -6,8 +6,6 @@ interface Props {
 }
 
 export const getServerSideProps = ssrHandler<Props>(async (context) => {
-  console.log("ICI");
-
   return {
     props: {
       timestamp: Date.now(),
