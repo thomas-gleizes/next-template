@@ -1,6 +1,6 @@
 import createHash from "create-hash";
 
-export const sha256 = (stringToHash: string) => {
+export const sha512 = (stringToHash: string) => {
   const hash = createHash("sha512");
 
   hash.update(stringToHash + process.env.SECRET_SEED);

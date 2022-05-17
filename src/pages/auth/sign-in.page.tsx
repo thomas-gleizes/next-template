@@ -8,6 +8,8 @@ import DefaultLayout from "components/layouts/DefaultLayout";
 import Input from "components/form/Input";
 import Button from "components/common/Button";
 import { ssrHandler } from "services/handler.service";
+import apiService from "services/api.service";
+import ApiService from "services/api.service";
 
 const initialValues: SignInPayload = {
   username: "Kalat",
@@ -16,7 +18,6 @@ const initialValues: SignInPayload = {
 };
 
 export const getServerSideProps = ssrHandler(async (context) => {
-
   console.log(context.req.cookies);
 
   return { props: {} };
@@ -33,6 +34,16 @@ const SignInPage: Page = () => {
 
       console.log(document.cookie);
     } catch (e) {}
+  };
+
+  const handleRefesh = async () => {
+    const response = await apiService.get("/auth/me");
+
+    console.log(response);
+  };
+
+  const handleLogout = async () => {
+    const response = await ApiService.post("/auth/logout");
   };
 
   return (
@@ -68,6 +79,14 @@ const SignInPage: Page = () => {
             </Form>
           )}
         </Formik>
+        <div className="my-10 space-y-4">
+          <Button type="button" color="green" onClick={handleRefesh}>
+            Show ME
+          </Button>
+          <Button type="button" color="red" onClick={handleLogout}>
+            Logout
+          </Button>
+        </div>
       </div>
     </div>
   );

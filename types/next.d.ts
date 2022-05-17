@@ -22,6 +22,8 @@ declare module "next/app" {
     Component: Page & { layout?: Component };
   }
 
-  declare type ApiRequest = NextApiRequest & { session: SessionService };
+  declare type ApiRequest = NextApiRequest & {
+    session: SessionService & { user?: User; token?: string };
+  };
   declare type ApiResponse = NextApiResponse;
 }
