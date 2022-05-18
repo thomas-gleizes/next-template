@@ -13,14 +13,14 @@ abstract class Api {
     path: string,
     params?: any
   ): Promise<AxiosResponse<R>> {
-    return this._instance.get<R, R, P>(`${this._path}${path}`, params);
+    return this._instance.get<R, AxiosResponse<R>, P>(`${this._path}${path}`, params);
   }
 
   protected post<R extends DefaultResponse = DefaultResponse, D = any>(
     path: string,
     data: D
   ): Promise<AxiosResponse<R>> {
-    return this._instance.post<R, R, D>(`${this._path}${path}`, data);
+    return this._instance.post<R, AxiosResponse<R>, D>(`${this._path}${path}`, data);
   }
 }
 
