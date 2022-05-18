@@ -10,7 +10,7 @@ declare module "next/app" {
   import SessionService from "services/session.service";
 
   declare type Page<P = {}> = NextPage<P> & {
-    layout?: Component<{ children: Node } & P>;
+    layout?: Component<{ children: RNode } & P>;
   };
 
   declare type ServerSideProps<T> = GetServerSideProps<T>;

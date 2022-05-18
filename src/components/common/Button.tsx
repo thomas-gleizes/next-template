@@ -7,13 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   gradiant?: boolean;
 }
 
-const Button: Component<ButtonProps> = ({
-  color,
-  className,
-  outline,
-  gradiant,
-  ...rest
-}) => {
+const Button: Component<ButtonProps> = ({ color, className, outline, gradiant, ...rest }) => {
   const customColor = useMemo<string>(() => {
     if (outline)
       return `text-black hover:text-white border-[2.8px] bg-gray-50 border-${color}-500 hover:bg-${color}-500 rounded-md`;
@@ -26,7 +20,7 @@ const Button: Component<ButtonProps> = ({
       className={classnames(
         customColor,
         className,
-        "shadow-lg hover:shadow-xl focus:shadow-sm select-none w-full text-lg font-bold transition text-white"
+        "shadow-lg hover:shadow-xl focus:shadow-sm select-none px-10 py-1 text-lg font-bold transition text-white"
       )}
       {...rest}
     />

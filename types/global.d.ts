@@ -2,7 +2,7 @@ declare type Component<P = {}> = React.FC<P>;
 
 declare type State<S = any> = [S, React.Dispatch<React.SetStateAction<S>>];
 
-declare type Node = React.ReactNode;
+declare type RNode = React.ReactNode;
 
 interface ContextProviderProps {
   children: React.ReactNode;

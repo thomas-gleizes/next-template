@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  children: Node;
+  children: RNode;
 }
 
 const DefaultLayout: Component<Props> = ({ children }) => {

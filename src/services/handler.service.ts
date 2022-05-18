@@ -14,7 +14,7 @@ import { apiLogger, ssrLogger } from "middlewares/logger.middleware";
 import queryParserMiddleware from "middlewares/queryParser.middleware";
 import trace from "utils/trace";
 import { ApiError, SchemaError, SsrError } from "errors";
-import sessionMiddleware from "middlewares/session.middleware";
+import { sessionMiddleware } from "middlewares/session.middleware";
 
 export const apiHandler = () =>
   nc<NextApiRequest, NextApiResponse>({
@@ -54,7 +54,9 @@ export function ssrHandler<
   Q extends ParsedUrlQuery = ParsedUrlQuery,
   D extends PreviewData = PreviewData
 >(
-  handler: (context: GetServerSidePropsContext<Q>) => Promise<GetServerSidePropsResult<P>>
+  handler: (
+    context: GetServerSidePropsContext<Q> & { session?: SessionService }
+  ) => Promise<GetServerSidePropsResult<P>>
 ): GetServerSideProps<P, Q, D> {
   // @ts-ignore
   return async (context) => {

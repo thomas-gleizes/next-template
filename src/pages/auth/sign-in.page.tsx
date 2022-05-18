@@ -18,9 +18,13 @@ const initialValues: SignInPayload = {
 };
 
 export const getServerSideProps = ssrHandler(async (context) => {
-  console.log(context.req.cookies);
-
-  return { props: {} };
+  return {
+    props: {},
+    redirect: {
+      permanent: true,
+      pathname: "/",
+    },
+  };
 });
 
 const SignInPage: Page = () => {
